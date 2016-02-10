@@ -43,7 +43,7 @@ if(sizeof($response_to_request['Body']) > 0) {
     foreach ($response_to_request['Body'] as $body) {
         
         $_SESSION['loginForms'][$body->siteId] = $body->loginForms;
-        echo '<tr><td>'.$body->siteId.'</td><td>'.$body->isAlreadyAddedByUser.'</td><td><a href="http://localhost/yodlee/demo/site_login.php">'.$body->defaultDisplayName.'</a></td><td>'.json_encode($body->contentServiceInfos).'</td><td>'.$body->baseUrl.'</td><td>'.$body->loginUrl.'</td><td>'.$body->defaultHelpText.'</td></tr>';
+        echo '<tr><td>'.$body->siteId.'</td><td>'.$body->isAlreadyAddedByUser.'</td><td><a href="http://localhost/yodlee/demo/site_login.php?site='.$body->siteId.'">'.$body->defaultDisplayName.'</a></td><td>'.json_encode($body->contentServiceInfos).'</td><td>'.$body->baseUrl.'</td><td>'.$body->loginUrl.'</td><td>'.$body->defaultHelpText.'</td></tr>';
         
         ////print_r($body);
     }
