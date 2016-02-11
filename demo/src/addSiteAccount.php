@@ -5,17 +5,17 @@ require_once "restclient.class.php";
 ## =================== / =======================================
 ## Parameters  
 ## =================== / =======================================
-$params = ( isset($_POST["params"]) ) ? $_POST["params"] : "";
-$data = explode("&", $params);
+//$params = ( isset($_POST["params"]) ) ? $_POST["params"] : "";
+//$data = explode("&", $params);
 
-$sendParameters = array();
-$FIELD = 0;
-$VALUE = 1; 
+$sendParameters = $login_form; //array();
+//$FIELD = 0;
+//$VALUE = 1; 
 
-foreach( $data as $ref ){
-    $f = explode("=", $ref);
-    $sendParameters[urldecode($f[$FIELD])] = urldecode($f[$VALUE]);
-}
+//foreach( $data as $ref ){
+//    $f = explode("=", $ref);
+//    $sendParameters[urldecode($f[$FIELD])] = urldecode($f[$VALUE]);
+//}
 /*
  * {
     "conjunctionOp": {
@@ -64,11 +64,11 @@ foreach( $data as $ref ){
  */
 //$cobSessionToken = ( isset($_POST["cobSessionToken"]) ) ? $_POST["cobSessionToken"] : "";
 //$userSessionToken = ( isset($_POST["userSessionToken"]) ) ? $_POST["userSessionToken"] : "";
-
+//print_r($sendParameters); die;
 $cobSessionToken    = $_SESSION['login_response']['Body']->userContext->cobrandConversationCredentials->sessionToken;
 $userSessionToken   = $_SESSION['login_response']['Body']->userContext->conversationCredentials->sessionToken;
-$siteId = ( isset($_POST["siteId"]) ) ? $_POST["siteId"] : "";
-$credentialFields = ( isset($_POST["credentialFields"]) ) ? $_POST["credentialFields"] : "";
+//$siteId = ( isset($_POST["siteId"]) ) ? $_POST["siteId"] : "";
+//$credentialFields = ( isset($_POST["credentialFields"]) ) ? $_POST["credentialFields"] : "";
 
 $response = array();
 
@@ -79,4 +79,5 @@ $config = array(
 
 $response_to_request   = Yodlee\restClient::Post($config["url"], $config["parameters"]);
 
-print json_encode($response_to_request);
+echo 'Site Added. ';
+print_r($response_to_request);
