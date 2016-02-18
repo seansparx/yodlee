@@ -79,5 +79,14 @@ $config = array(
 
 $response_to_request   = Yodlee\restClient::Post($config["url"], $config["parameters"]);
 
-echo 'Site Added. ';
-print_r($response_to_request);
+if($response_to_request['Body']->errorOccurred == true){
+    echo $response_to_request['Body']->message;
+}
+if($response_to_request['Body']->errorCode > 0) {
+    echo 'Error Code : '.$response_to_request['Body']->errorCode.', '.$response_to_request['Body']->errorDetail;
+}
+else{
+    $_SESSION['add_site_response'] = $response_to_request;
+    echo 'Site Added. <pre>';
+    header('Location:dashboard.php');
+}

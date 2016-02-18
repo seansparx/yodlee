@@ -1,15 +1,16 @@
 <?php
     session_start();
 
-    $credentialFields = $_SESSION['loginForms'][$_GET['site']][0]->componentList;
-
-    $credentialFields[0]->value = ''; // site login id.
-    $credentialFields[1]->value = ''; // site password.
-
+    $credentialFields   = $_SESSION['loginForms'][$_GET['site']][0]->componentList;
     $cobSessionToken    = $_SESSION['login_response']['Body']->userContext->cobrandConversationCredentials->sessionToken;
     $userSessionToken   = $_SESSION['login_response']['Body']->userContext->conversationCredentials->sessionToken;
 
-    $login_form = array(
+    if(isset($_POST['submit']) && (trim($_POST['login'])!='') && (trim($_POST['passwd'])!='')){
+        
+        $credentialFields[0]->value = $_POST['login']; // site login id.
+        $credentialFields[1]->value = $_POST['passwd']; // site password.
+        
+        $login_form = array(
                     "siteId"                                    => $_GET['site'], 
                     "cobSessionToken"                           => $cobSessionToken, 
                     "userSessionToken"                          => $userSessionToken,
@@ -43,29 +44,39 @@
                     "credentialFields[1].isMFA"                 => $credentialFields[1]->isMFA,
                     "credentialFields.enclosedType"             => (isset($credentialFields[0]->fieldInfoType) ? $credentialFields[0]->fieldInfoType : "com.yodlee.common.FieldInfoSingle")
                 );
-                    
-?>
-<!DOCTYPE html>
-<HTML>
-<HEAD>
-	<title>Demo - Step 3</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link rel="stylesheet" href="css/codemirror.css">
-	<link rel="stylesheet" href="css/eclipse.css">
-	<style>
-		body{
-			padding: 10px;	
-		}
-		.c-method{
-			margin-left: 20px;
-		}
-	</style>
-</HEAD>
-<BODY>
-    <h5>Username : <?php echo $_SESSION['login_response']['Body']->loginName.' ('.$_SESSION['login_response']['Body']->userId.')'; ?></h5>
-    <?php 
-        echo '<pre>';
+        
         include_once 'src/addSiteAccount.php';
-    ?>
-</BODY>
-</HTML>
+        exit;
+    }
+    else{
+        ?>
+        <!DOCTYPE html>
+        <HTML>
+            <HEAD>
+                <title>Demo - Step 3</title>
+                <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+                <link rel="stylesheet" href="css/codemirror.css">
+                <link rel="stylesheet" href="css/eclipse.css">
+                <style>
+                body{
+                padding: 10px;	
+                }
+                .c-method{
+                margin-left: 20px;
+                }
+                </style>
+            </HEAD>
+            <BODY>
+                <h5>Username : <?php echo $_SESSION['login_response']['Body']->loginName . ' (' . $_SESSION['login_response']['Body']->userId . ')'; ?></h5>
+                <b>Please login to add your account</b>
+                <form action="" method="post">
+                    <input type="text" value="" placeholder="Enter site login" name="login"/>
+                    <input type="password" value="" placeholder="Enter site password" name="passwd"/>
+                    <input type="submit" name="submit" value="login"/>
+                </form>
+            </BODY>
+        </HTML>
+        <?php
+    }
+    
+?>

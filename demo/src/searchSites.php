@@ -1,6 +1,7 @@
 <?php session_start();
 require_once "config.inc.php";
 require_once "restclient.class.php";
+require_once "constants.php";
 
 ## =================== / =======================================
 ## Parameters  
@@ -32,6 +33,7 @@ $response_to_request   = Yodlee\restClient::Post($config["url"], $config["parame
 //echo '<pre>';
 //print_r($response_to_request['Body']);
 
+echo '<h2>Search Result</h2>';
 
 echo '<table border="1" cellpadding="" width="100%">';
 echo '<thead>';
@@ -43,7 +45,7 @@ if(sizeof($response_to_request['Body']) > 0) {
     foreach ($response_to_request['Body'] as $body) {
         
         $_SESSION['loginForms'][$body->siteId] = $body->loginForms;
-        echo '<tr><td>'.$body->siteId.'</td><td>'.$body->isAlreadyAddedByUser.'</td><td><a href="http://localhost/yodlee/demo/site_login.php?site='.$body->siteId.'">'.$body->defaultDisplayName.'</a></td><td>'.json_encode($body->contentServiceInfos).'</td><td>'.$body->baseUrl.'</td><td>'.$body->loginUrl.'</td><td>'.$body->defaultHelpText.'</td></tr>';
+        echo '<tr><td>'.$body->siteId.'</td><td>'.$body->isAlreadyAddedByUser.'</td><td><a href="'.SITE_URL.'site_login.php?site='.$body->siteId.'">'.$body->defaultDisplayName.'</a></td><td>'.json_encode($body->contentServiceInfos).'</td><td>'.$body->baseUrl.'</td><td>'.$body->loginUrl.'</td><td>'.$body->defaultHelpText.'</td></tr>';
         
         ////print_r($body);
     }

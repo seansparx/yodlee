@@ -41,7 +41,7 @@ if($isErrorLocalExist){
 //print json_encode($response);
 if($response['isValid']){
     $_SESSION['login_response'] = $response;
-    header('Location:http://localhost/yodlee/demo/dashboard.php');
+    header('Location:'.SITE_URL.'dashboard.php');
 }
 else{
     echo 'Error :';

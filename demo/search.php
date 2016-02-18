@@ -1,11 +1,6 @@
 <?php
     session_start();
 
-    //echo '<pre>';
-//    print_r($_SESSION['cobSessionToken']);
-//    echo '<br>';
-    
-    
     if($_SESSION['login_response']['isValid']) {
         //print_r($_SESSION['login_response']['Body']);
         $cobSessionToken  = $_SESSION['login_response']['Body']->userContext->cobrandConversationCredentials->sessionToken;
@@ -18,15 +13,7 @@
     else{
         die('Invalid response.');
     }
-    
-    
-//    if($_SESSION['session_token']) {
-//        include_once 'src/userSessionToken.php';
-//    }
-//    else{
-//        die('session token not found.');
-//    }
-    
+        
 ?>
 <!DOCTYPE html>
 <HTML>
@@ -59,19 +46,15 @@
                 <br><br>
                 <button id="btn-searchSite" class="btn btn-searchSite btn-primary">Search</button>
                 <br><br>
-                <p><strong>Response:</strong></p>
-                <p id="response-searchSite">--</p>
-<!--                <pre>
-                    <p id="response-searchSite">--</p>
-                </pre>-->
+                <p id="response-searchSite">
+                    <?php include_once 'src/getPopularSites.php'; ?>
+                </p>
             </div>
     </fieldset>
     <!-- Method search sites -->
     
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!--<script src="js/codemirror.js"></script>
-<script src="js/javascript.js"></script>-->
 <script>
     $(function(){
 
@@ -106,19 +89,6 @@
                     },
                     url: "src/searchSites.php",
                     success: function(data, textStatus, jqXHR){ //alert(data);
-//                            try{
-////                                var response = JSON.parse(data);
-////                                if (!$.isUndefined(response.Body)){
-////                                    response.Body = (typeof(response.Body) == "object")? response.Body : JSON.parse(response.Body);
-////                                }
-////                                alert(response.Body);
-//                                    //editSearchSite.setOption("value", );
-//                                $("#response-searchSite").html(data);
-//                            }
-//                            catch(e){
-//                                    //editSearchSite.setOption("value", response.Body);
-//                                    $("#response-searchSite").html(response.Body);
-//                            }
                             $("#response-searchSite").html(data);
                             $.maskLoading("button.btn-searchSite",{showLoading:false, msg:"Search"});
                     },

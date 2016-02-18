@@ -1,6 +1,3 @@
-<?php session_start();
-require_once "src/constants.php";
-?>
 <!DOCTYPE html>
 <HTML>
 <HEAD>
@@ -20,14 +17,12 @@ require_once "src/constants.php";
 <BODY>
     <h5>Username : <?php echo $_SESSION['login_response']['Body']->loginName.' ('.$_SESSION['login_response']['Body']->userId.')'; ?></h5>
     <ul>
-        <li><a target="_blank" href="<?php echo SITE_URL; ?>search.php">Search / Add Sites</a></li>
-        <li><a target="_blank" href="<?php echo SITE_URL; ?>transaction_categories.php">Transaction Categories</a></li>
+        <li><a target="_blank" href="<?php echo SITE_URL; ?>search.php">Search / Add New Site</a></li>
     </ul>
-    
-    <?php
-        echo '<pre>';
-        include_once 'src/getAllSiteAccounts.php';
-        echo '</pre>';
+    <?php 
+    echo '<pre>';
+    include_once 'src/getItemSummariesForSite.php'; 
+    echo '</pre>';
     ?>
 </BODY>
 </HTML>
