@@ -1,0 +1,15 @@
+<?php
+//    define('API_USER', 'sbCobsean.rock');
+//    define('API_PASS', 'dbab65bc-b453-4778-a01d-bb38e273b82f');
+//
+//    define('USER_NAME', 'sbMemsean.rock1');
+//    define('USER_PASS', 'sbMemsean.rock1#123');
+    
+    define('API_USER', 'sbCobmr.rakesh');
+    define('API_PASS', 'e00b8446-1c69-4cae-80de-abbce64b18e4');
+
+    define('USER_NAME', 'sbMemmr.rakesh1');
+    define('USER_PASS', 'sbMemmr.rakesh1#123');
+    
+    define("SITE_URL", 'http://norefresh.thesparxitsolutions.com/rakesh_php/yodlee/demo/');
+?>
